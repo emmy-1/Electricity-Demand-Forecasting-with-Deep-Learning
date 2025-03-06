@@ -18,6 +18,11 @@ This project involves:
 1. **Data Architecture**: Designing a Modern Data Warehouse Using Medallion Architecture **Bronze**, **Silver**, and **Gold** layers.
 2. **ETL Pipelines**: Extracting, transforming, and loading data from source txt file into the Microsoft SQL warehouse.
 3. **Data Modeling**: Developing 2d Tensor(table) optimized for Deep learning.
+4. **Model building & training**: Build & Train a model (e.g., LSTM, GRU, Transformer) using historical Individual Household electricity consumption data from 2006–2010.
+5. **Evaluation**: Use metrics like MSE, RMSE, and MAE to assess performance.
+6. **Orchestration & Production**: Use Apache Airflow to manage the data pipeline (extract, preprocess, feed data, and store predictions).
+Please Visit for more detailed project plan:
+
 
 ---
 ## 🚀 Project Requirements
@@ -30,7 +35,7 @@ Develop a Modern Data Warehouse using Microsoft SQL Server to consolidate indivi
 
 ### Specification
 
-- **Data Source** : Import data from a text file or CSV file, or install the `ucimlrepo` library and fetch the dataset from their API source.
+- **Data Source** : Import data from a text file or install the `ucimlrepo` library and fetch the dataset from their API source.
 - **Data Quality** : Preprocess the data to handle missing values, normalize/scale features, and create appropriate input-output sequences for the model.
 - **Scope** : Focus only on the following time range : 2006 and November 2010 (47 months) and resample the dataset using a sampling rate of 15 minutes.
 - **Documentation** :  Provide clear documentation of the data model to support business stakeholders.
@@ -39,7 +44,7 @@ Develop a Modern Data Warehouse using Microsoft SQL Server to consolidate indivi
 
 ### Objective
 
-A trained **deep learning model** capable of **forecasting electricity demand for the next 15 minutes.**
+A trained **deep learning model** capable of **forecasting electricity demand for the next 1 hour.**
 
 ### Specification
 
@@ -47,3 +52,38 @@ A trained **deep learning model** capable of **forecasting electricity demand fo
 - **Evaluate Model Performance** : Evaluate the model's performance using key metrics such as: Mean Squared Error (MSE) or Root Mean Squared Error (RMSE) to measure prediction accuracy.
 - **Orchestration And Production** : Use Apache Airflow to orchestrate the data pipeline, including: Extracting data from the Data Warehouse, Preprocessing and feeding data into the model and Storing predictions back into the Data Warehouse.
 - **Documentation** :  Provide clear documentation of the deep Learning Model to support business stakeholders.
+
+## 📂 Repository Structure
+```
+data-warehouse-project/
+│
+├── datasets/                           # Raw datasets used for the project (household_power_consumption.txt)
+│
+├── docs/                               # Project documentation and architecture details
+│   ├── etl.drawio                      # Draw.io file shows all the different techniques and methods of ETL
+│   ├── data_architecture.drawio        # The Draw.io file shows the project's architecture
+│
+├── scripts/                            # SQL scripts for ETL and transformations
+│
+├── tests/                              # Test scripts and quality files
+│
+├── README.md                           # Project overview and instructions
+├── LICENSE                             # License information for the repository
+├── .gitignore                          # Files and directories to be ignored by Git
+└── requirements.txt                    # Dependencies and requirements for the project
+```
+---
+
+
+## 🛡️ License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## 🌟 About Me
+
+Hi there! I'm **Emmanuel Obayomi**. I’m an IT professional and passionate about Data Engineering and deep learning. My mission is to use these skills to tackle data infrastructure challenges in developing nations!
+
+Let's stay in touch! Feel free to connect with me on the following platforms:
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/emmanuel-obayomi-3084051b1)
+[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.datascienceportfol.io/emmanuelobayomi)
