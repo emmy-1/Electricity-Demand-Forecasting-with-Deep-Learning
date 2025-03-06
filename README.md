@@ -9,3 +9,12 @@ The data architecture for this project follows Medallion Architecture **Bronze**
 1. **Bronze Layer**: Stores original raw data from the source text file. Data is ingested from txt Files into SQL Server Database.
 2. **Silver Layer**: This layer includes data cleansing, standardization, and normalization processes to prepare deep learning.
 3. **Gold Layer**: Houses model ready data modeled into a 2D tensor (Table).
+
+---
+## 📖 Project Overview
+
+This project involves:
+
+1. **Data Architecture**: Designing a Modern Data Warehouse Using Medallion Architecture **Bronze**, **Silver**, and **Gold** layers.
+2. **ETL Pipelines**: Extracting, transforming, and loading data from source txt file into the Microsoft SQL warehouse.
+3. **Data Modeling**: Developing 2d Tensor(table) optimized for Deep learning.
