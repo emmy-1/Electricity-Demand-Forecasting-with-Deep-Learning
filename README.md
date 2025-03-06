@@ -64,6 +64,7 @@ data-warehouse-project/
 │   ├── data_architecture.drawio        # The Draw.io file shows the project's architecture
 │
 ├── scripts/                            # SQL scripts for ETL and transformations
+├── init_database/                      # Scripts for creating database and schema
 │
 ├── tests/                              # Test scripts and quality files
 │
