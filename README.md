@@ -18,3 +18,32 @@ This project involves:
 1. **Data Architecture**: Designing a Modern Data Warehouse Using Medallion Architecture **Bronze**, **Silver**, and **Gold** layers.
 2. **ETL Pipelines**: Extracting, transforming, and loading data from source txt file into the Microsoft SQL warehouse.
 3. **Data Modeling**: Developing 2d Tensor(table) optimized for Deep learning.
+
+---
+## 🚀 Project Requirements
+
+## Building a Data Warehouse (Data Engineering)
+
+### Objective
+
+Develop a Modern Data Warehouse using Microsoft SQL Server to consolidate individual Household Electric Power Consumption data. This centralized repository will support a data engineering pipeline, enabling deep learning-based demand forecasting and anomaly detection to optimize grid operations.  
+
+### Specification
+
+- **Data Source** : Import data from a text file or CSV file, or install the `ucimlrepo` library and fetch the dataset from their API source.
+- **Data Quality** : Preprocess the data to handle missing values, normalize/scale features, and create appropriate input-output sequences for the model.
+- **Scope** : Focus only on the following time range : 2006 and November 2010 (47 months) and resample the dataset using a sampling rate of 15 minutes.
+- **Documentation** :  Provide clear documentation of the data model to support business stakeholders.
+
+## Building a Deep Learning Model ( Deep Learning with TensorFlow)
+
+### Objective
+
+A trained **deep learning model** capable of **forecasting electricity demand for the next 15 minutes.**
+
+### Specification
+
+- **Model Training** : Train a deep learning model (e.g., LSTM, GRU, or Transformer) to forecast electricity demand for the next 15 minutes using historical time series data.
+- **Evaluate Model Performance** : Evaluate the model's performance using key metrics such as: Mean Squared Error (MSE) or Root Mean Squared Error (RMSE) to measure prediction accuracy.
+- **Orchestration And Production** : Use Apache Airflow to orchestrate the data pipeline, including: Extracting data from the Data Warehouse, Preprocessing and feeding data into the model and Storing predictions back into the Data Warehouse.
+- **Documentation** :  Provide clear documentation of the deep Learning Model to support business stakeholders.
