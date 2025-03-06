@@ -48,7 +48,7 @@ A trained **deep learning model** capable of **forecasting electricity demand fo
 
 ### Specification
 
-- **Model Training** : Train a deep learning model (e.g., LSTM, GRU, or Transformer) to forecast electricity demand for the next 15 minutes using historical time series data.
+- **Model Training** : Train a deep learning model (e.g., LSTM, GRU, or Transformer) to forecast electricity demand for the next 1 hour using historical time series data.
 - **Evaluate Model Performance** : Evaluate the model's performance using key metrics such as: Mean Squared Error (MSE) or Root Mean Squared Error (RMSE) to measure prediction accuracy.
 - **Orchestration And Production** : Use Apache Airflow to orchestrate the data pipeline, including: Extracting data from the Data Warehouse, Preprocessing and feeding data into the model and Storing predictions back into the Data Warehouse.
 - **Documentation** :  Provide clear documentation of the deep Learning Model to support business stakeholders.
