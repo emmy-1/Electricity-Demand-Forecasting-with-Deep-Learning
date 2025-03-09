@@ -64,6 +64,7 @@ data-warehouse-project/
 │   ├── data_architecture.drawio        # The Draw.io file shows the project's architecture
 │
 ├── scripts/                            # SQL scripts for ETL and transformations
+├── init_database                       # Scripts for creating database and schema
 │
 ├── tests/                              # Test scripts and quality files
 │
@@ -87,3 +88,7 @@ Let's stay in touch! Feel free to connect with me on the following platforms:
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/emmanuel-obayomi-3084051b1)
 [![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.datascienceportfol.io/emmanuelobayomi)
+
+
+## References
+[1] DataWithBaraa/sql-data-warehouse-project  https://github.com/DataWithBaraa/sql-data-warehouse-project
