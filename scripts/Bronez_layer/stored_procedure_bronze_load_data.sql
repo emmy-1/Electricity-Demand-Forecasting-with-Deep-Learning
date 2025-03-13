@@ -58,7 +58,6 @@
 -- Code Breakdown
 -- =================================================================================================================================
 
---  Create or alters procedure called load_data which is stored in the bronze schema
 CREATE OR ALTER PROCEDURE bronze.load_data 
     @file_path NVARCHAR(MAX) -- Parameter for the file path
 AS
@@ -72,51 +71,47 @@ BEGIN
     -- Begin the main logic in a TRY block to handle errors gracefully
     BEGIN TRY
         -- ========================================================================================
-        -- Step 1: Check if the table already exists. If it does, drop the table.
+        -- Step 1: Check if the table exists. If it doesn't, create it.
         -- ========================================================================================
         PRINT '=============================================================================';
-        PRINT 'CHECKING IF bronze.household_power_consumption TABLE EXISTS? Drops if it does';
+        PRINT 'CHECKING IF bronze.household_power_consumption TABLE EXISTS? Creates if it doesn''t';
         PRINT '=============================================================================';
 
         -- Check if the table exists in the bronze schema
-        IF OBJECT_ID('bronze.household_power_consumption', 'U') IS NOT NULL
+        IF OBJECT_ID('bronze.household_power_consumption', 'U') IS NULL
         BEGIN
-            -- Drop the table if it exists
-            DROP TABLE bronze.household_power_consumption;
+            -- Create the table with the specified schema        
+            CREATE TABLE bronze.household_power_consumption(
+                [Date] NVARCHAR(10),                       
+                [Time] TIME,                               
+                Global_active_power NVARCHAR(10) NULL,     
+                Global_reactive_power NVARCHAR(10) NULL,   
+                Voltage NVARCHAR(10) NULL,                 
+                Global_intensity NVARCHAR(10) NULL,        
+                Sub_metering_1 NVARCHAR(10) NULL,          
+                Sub_metering_2 NVARCHAR(10),               
+                Sub_metering_3 NVARCHAR(10) NULL           
+            );
         END;
 
         -- ====================================================================================
-        -- Step 2: Create a new table called bronze.household_power_consumption
+        -- Step 2: Truncate the table to clear existing data
         -- ====================================================================================
-        PRINT '=============================================================================';   
-        PRINT 'CREATING A NEW TABLE CALLED bronze.household_power_consumption';
+        PRINT '=============================================================================';
+        PRINT 'TRUNCATING TABLE...';
         PRINT '=============================================================================';
 
-        -- Create the table with the specified schema        
-        CREATE TABLE bronze.household_power_consumption(
-            [Date] NVARCHAR(10),                       -- Date column (e.g., "16/12/2006")
-            [Time] TIME,                               -- Time column (e.g., "17:24:00")
-            Global_active_power NVARCHAR(10) NULL,     -- Global active power (nullable)
-            Global_reactive_power NVARCHAR(10) NULL,   -- Global reactive power (nullable)   
-            Voltage NVARCHAR(10) NULL,                 -- Voltage (nullable)                 
-            Global_intensity NVARCHAR(10) NULL,        -- Global intensity (nullable)
-            Sub_metering_1 NVARCHAR(10) NULL,          -- Sub-metering 1 (nullable)
-            Sub_metering_2 NVARCHAR(10),               -- Sub-metering 2 (non-nullable)
-            Sub_metering_3 NVARCHAR(10) NULL           -- Sub-metering 3 (nullable)
-        );
+        TRUNCATE TABLE bronze.household_power_consumption;
 
         -- ====================================================================================
         -- Step 3: Load data from the text file into the table using BULK INSERT
         -- ====================================================================================
         PRINT '=============================================================================';
-        PRINT 'TRUNCATING AND INSERTING TXT FILE FROM ' + @file_path;
+        PRINT 'LOADING DATA FROM ' + @file_path;
         PRINT '=============================================================================';
 
         -- Record the start time of the data load process
         SET @start_time = GETDATE();
-
-        -- Truncate the table (optional, since the table was dropped and recreated)
-        TRUNCATE TABLE bronze.household_power_consumption;
 
         -- Construct the dynamic SQL statement for BULK INSERT
         SET @sql = '
