@@ -127,4 +127,3 @@ CREATE OR ALTER PROCEDURE sliver.load_data
 -- Run stored procedure 
 EXECUTE sliver.load_data
 
-SELECT COUNT(*) FROM sliver.household_power_consumption
