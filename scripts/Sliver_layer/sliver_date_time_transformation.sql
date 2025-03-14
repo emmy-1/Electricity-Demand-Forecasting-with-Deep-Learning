@@ -1,40 +1,24 @@
--- ================================================================================================
--- Sliver Table Transformation: Household Power Consumption
--- ================================================================================================
--- Purpose:
+-- =================================================================================================
+-- Script: Transform and Load Data into the sliver layer
+-- Author: Junior Data Engineer
+-- Date: 2025-03-14
+-- Version: 1.0
+-- Description:
 -- This script transforms raw household power consumption data from the Bronze layer into a clean,
 -- structured, and analysis-ready format for the Silver layer. It ensures data quality by handling
 -- missing values, combining date and time into a single column, and replacing NULLs with column
 -- averages.
--- ================================================================================================
+-- =================================================================================================
 
--- Key Steps:
--- 1. **Data Cleaning**:
---    - Replace missing values (represented by '?') with NULL.
---    - Convert columns to appropriate data types (e.g., DECIMAL for numeric values).
---    - Combine the separate Date and Time columns into a single DateTime column.
 
--- 2. **Handling Missing Values**:
---    - Calculate the average (mean) value for each column, excluding NULLs.
---    - Replace NULLs with the calculated mean to ensure no gaps in the data.
-
--- 3. **Data Transformation**:
---    - Round numeric values to 3 decimal places for consistency.
---    - Insert the cleaned and transformed data into the Silver table for further analysis.
--- ================================================================================================
-
--- Define the CTEs (Common Table Expressions) for data transformation
-
--- Define the CTEs first
+-- =================================================================================================
+-- Section 1: Table Creation (Idempotent)
+-- Purpose: Creates a table to move data from the bronze.household_power_consumption into the sliver layer(sliver.household_power_consumption).
+--          Ensures idempotency by dropping and recreating the table if it already exists.
+-- =================================================================================================
 CREATE OR ALTER PROCEDURE sliver.load_data 
     AS
     BEGIN TRY
-        -- ================================================================================================================================
-        -- Table Creation: sliver.household_power_consumption
-        -- Purpose: Creates a table to move data from the bronze.household_power_consumption into the sliver layer(sliver.household_power_consumption).
-        --          Ensures idempotency by dropping and recreating the table if it already exists.
-        -- ================================================================================================================================
-
         -- Check if the table exists in the sliver schema
         IF OBJECT_ID('sliver.household_power_consumption', 'U') IS NOT NULL
         BEGIN
@@ -42,9 +26,7 @@ CREATE OR ALTER PROCEDURE sliver.load_data
             DROP TABLE sliver.household_power_consumption;
         END;
 
-        -- ====================================================================================
-        -- Step 2: Create a new table called sliver.household_power_consumption
-        -- Create the table with the specified schema        
+        -- Step 2: Create a new table called sliver.household_power_consumption     
         CREATE TABLE sliver.household_power_consumption(
             [date_time] DATETIME2(0),                           -- Date column (e.g., "16/12/2006")
             --[Time] TIME,                                -- Time column (e.g., "17:24:00")
@@ -58,6 +40,11 @@ CREATE OR ALTER PROCEDURE sliver.load_data
             dwh_create_date DATETIME2(0) DEFAULT GETDATE()          
         );
 
+
+-- =================================================================================================
+-- Section 2: Data Transformation
+-- Purpose: Clean and transform raw household power consumption data from the Bronze layer.
+-- =================================================================================================
         WITH transformation AS (
             SELECT
                 -- Combine Date and Time into a single DateTime column
@@ -103,6 +90,12 @@ CREATE OR ALTER PROCEDURE sliver.load_data
                 AVG(other_appliences) AS mean_other_appliences
             FROM transformation
         )
+
+
+-- =================================================================================================
+-- Section 3: Data Loading
+-- Purpose: Insert the transformed data into the Silver layer.
+-- =================================================================================================
         -- Insert the transformed data into the Silver table
         INSERT INTO sliver.household_power_consumption (
             [date_time],
@@ -128,5 +121,8 @@ CREATE OR ALTER PROCEDURE sliver.load_data
     END TRY
     BEGIN CATCH
         EXEC log_error @schema_name = 'silver', @table_name = 'error_logs';
+        THROW;
     END CATCH
-EXECUTE sliver.load_data 
+
+-- Run stored procedure 
+EXECUTE sliver.load_data
