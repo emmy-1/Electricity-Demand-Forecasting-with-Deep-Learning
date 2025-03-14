@@ -76,3 +76,6 @@ BEGIN
     -- =============================================================================================
     PRINT 'All data quality checks passed successfully.';
 END;
+
+
+EXEC sliver.validate_household_power_consumption
