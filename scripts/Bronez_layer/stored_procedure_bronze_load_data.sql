@@ -137,8 +137,7 @@ BEGIN
     -- =============================================================================
     BEGIN CATCH
         -- Log the error using the bronze.log_error procedure
-        EXECUTE bronze.log_error;
-
+        EXECUTE log_error @schema_name = 'bronze', @table_name = 'error_logs';
         -- Re-throw the error to stop further execution
         THROW;
     END CATCH;
