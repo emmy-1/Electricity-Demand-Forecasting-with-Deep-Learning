@@ -20,14 +20,14 @@
 
         -- Create the table with the specified schema        
         CREATE TABLE sliver.household_power_consumption(
-            [Date] DATETIME2,                           -- Date column (e.g., "16/12/2006")
-            [Time] TIME,                                -- Time column (e.g., "17:24:00")
-            Global_active_power FLOAT,                  -- Global active power (nullable)
-            Global_reactive_power FLOAT,                -- Global reactive power (nullable)   
-            Voltage FLOAT,                              -- Voltage (nullable)                 
-            Global_intensity FLOAT,                     -- Global intensity (nullable)
-            Sub_metering_1 FLOAT,                       -- Sub-metering 1 (nullable)
-            Sub_metering_2 FLOAT,                       -- Sub-metering 2 (non-nullable)
-            Sub_metering_3 FLOAT,                       -- Sub-metering 3 (nullable)
-            dwh_create_date DATETIME2 DEFAULT GETDATE()          
+            [date_time] DATETIME2(0),                           -- Date column (e.g., "16/12/2006")
+            --[Time] TIME,                                -- Time column (e.g., "17:24:00")
+            global_active_power DECIMAL(10, 3),                  -- Global active power (nullable)
+            global_reactive_power DECIMAL(10, 3),                -- Global reactive power (nullable)   
+            voltage DECIMAL(10, 3),                              -- Voltage (nullable)                 
+            global_intensity DECIMAL(10, 3),                     -- Global intensity (nullable)
+            kitchen DECIMAL(10, 3),                       -- Sub-metering 1 (nullable)
+            laundry_room DECIMAL(10, 3),                       -- Sub-metering 2 (non-nullable)
+            other_appliences DECIMAL(10, 3),                       -- Sub-metering 3 (nullable)
+            dwh_create_date DATETIME2(0) DEFAULT GETDATE()          
         );
