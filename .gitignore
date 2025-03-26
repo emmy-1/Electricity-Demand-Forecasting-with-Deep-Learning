@@ -1,6 +1,7 @@
 *.log
 temp/
 dataset/
+.env
 .venv/
 .venv/Lib/site-packages/numpy-2.2.4-cp311-cp311-win_amd64.whl
 .venv/Lib/site-packages/numpy/__config__.py
