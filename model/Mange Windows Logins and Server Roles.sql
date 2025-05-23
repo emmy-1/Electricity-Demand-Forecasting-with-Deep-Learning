@@ -25,16 +25,16 @@ WHERE type_desc = 'WINDOWS_LOGIN';  -- Filter to show only Windows logins
 -- Purpose: Add a new Windows login to the SQL Server instance.
 -- Note: Requires administrative privileges to execute.
 -- =================================================================================================
--- Create a Windows login for the user 'richard' from the domain 'MSI'
-CREATE LOGIN [MSI\richard] FROM WINDOWS;
+-- Create a Windows login for the user from the domain.
+CREATE LOGIN [DOMAIN\username] FROM WINDOWS;
 
 -- =================================================================================================
 -- Section 3: Grant Server-Level Permissions
 -- Purpose: Assign server-level permissions to the newly created Windows login.
 -- =================================================================================================
 -- Option 1: Grant full administrative access by adding the login to the 'sysadmin' role
-ALTER SERVER ROLE sysadmin ADD MEMBER [MSI\richard];
+ALTER SERVER ROLE sysadmin ADD MEMBER [DOMAIN\username];
 
 -- Option 2: Grant restricted access by adding the login to the 'dbcreator' role
 -- Uncomment the following line if you want to grant database creation privileges only
--- ALTER SERVER ROLE dbcreator ADD MEMBER [MSI\richard];
+-- ALTER SERVER ROLE dbcreator ADD MEMBER [DOMAIN\username];
